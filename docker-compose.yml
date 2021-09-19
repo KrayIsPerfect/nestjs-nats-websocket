@@ -8,6 +8,29 @@ services:
       - "6222:6222"
       - "4222:4222"
     networks: ["app-network"]
+  reader:
+    build:
+      context: reader
+      target: development
+    ports:
+      - "4222:4222"
+      - "3002:3002"
+      - "30002:9200"
+    volumes:
+      - /reader:/usr/src/app
+    networks:
+      - app-network
+#  writer:
+#      build:
+#        context: /writer
+#        target: development
+#      command: yarn run start:debug
+#      ports:
+#        - "3003:3003"
+#        - "30003:9300"
+#      volumes:
+#        - /writer:/usr/src/app
+#      networks: [ "app-network" ]
 networks:
   app-network:
     name: app-network
